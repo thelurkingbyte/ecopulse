@@ -142,6 +142,7 @@ The ESP32 acts as the local edge controller, handling sensor acquisition, proces
 | **Rainfall** | Tipping Bucket Rain Sensor | Precipitation measurement |
 | **Light Intensity** | BH1750 | Ambient illuminance |
 
+## Sample Pinout Diagram
 <img src="./images/pinout.png" alt="Node Pinout" />
 
 ---
@@ -381,17 +382,11 @@ The ambition is therefore not to build **another weather station**.
 
 It is to build the **observation layer for the environments we live in**.
 
-From a handful of nodes on a campus...
-
-to a dense environmental network across a city.
-
-From raw sensor readings...
-
-to patterns.
-
-From patterns...
-
-to decisions.
+```
+From a handful of nodes on a campus to a dense environmental network across a city.
+From raw sensor readings to patterns.
+From patterns to decisions.
+```
 
 **That is EcoPulse.**
 
