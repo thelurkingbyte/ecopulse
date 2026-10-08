@@ -1,11 +1,8 @@
 <div align="center">
 
-<img src="./logo.png" alt="EcoPulse Logo" width="180"/>
-
-# EcoPulse
+<img src="./logo-with-name.png" alt="EcoPulse Logo" width="180"/>
 
 ### **A distributed environmental intelligence network.**
-
 **Measure the environment. Understand the change. Act before it becomes a problem.**
 
 EcoPulse is an **ESP32-powered, solar-assisted environmental sensing network** designed to transform scattered environmental measurements into a living, high-resolution picture of the places we inhabit.
@@ -144,6 +141,8 @@ The ESP32 acts as the local edge controller, handling sensor acquisition, proces
 | **Air Pressure** | BMP390 | Atmospheric pressure |
 | **Rainfall** | Tipping Bucket Rain Sensor | Precipitation measurement |
 | **Light Intensity** | BH1750 | Ambient illuminance |
+
+<img src="./images/pinout.png" alt="Node Pinout" />
 
 ---
 
@@ -365,55 +364,6 @@ The software platform responsible for transforming measurements into maps, visua
 The long-term objective is to bridge these two worlds:
 
 > **A physical network that observes the environment, and a digital system that understands it.**
-
----
-
-# 🗺️ Roadmap
-
-### Hardware
-
-- [ ] Finalize node PCB / wiring architecture
-- [ ] Validate individual sensor accuracy
-- [ ] Characterize power consumption
-- [ ] Optimize solar charging
-- [ ] Develop weather-resistant enclosure
-- [ ] Implement field-ready node
-
-### Connectivity
-
-- [ ] Implement reliable node-to-server communication
-- [ ] Device identification & provisioning
-- [ ] Offline data buffering
-- [ ] Secure communication
-- [ ] Remote node health monitoring
-
-### Platform
-
-- [x] Initial dashboard concept
-- [x] Multi-node simulation
-- [ ] Live node ingestion
-- [ ] Persistent environmental database
-- [ ] Interactive environmental map
-- [ ] Historical analysis
-- [ ] Node health dashboard
-- [ ] Configurable alerts
-
-### Intelligence
-
-- [ ] Baseline modelling
-- [ ] Spatial anomaly detection
-- [ ] Temporal anomaly detection
-- [ ] Multi-variable correlation
-- [ ] Environmental event detection
-- [ ] Predictive analytics
-
-### Deployment
-
-- [ ] Small-scale pilot network
-- [ ] Field validation
-- [ ] Sensor calibration methodology
-- [ ] Long-term reliability testing
-- [ ] Larger distributed deployment
 
 ---
 
