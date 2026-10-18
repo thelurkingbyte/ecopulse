@@ -7,9 +7,7 @@
 
 EcoPulse is an **ESP32-powered, solar-assisted environmental sensing network** designed to transform scattered environmental measurements into a living, high-resolution picture of the places we inhabit.
 
-[**🌐 View the Live Dashboard**](https://ecopulse-dashboard-teal.vercel.app/)
-[**📷 Instagram**](https://instagram.com/project.ecopulse/)
-[**▶️ YouTube**](https://youtube.com/@projects-666)
+[**🌐 View the Live Dashboard**](https://thelurkingbyte.github.io/ecopulse/)
 
 </div>
 
