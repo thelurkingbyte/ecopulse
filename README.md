@@ -7,7 +7,7 @@
 
 EcoPulse is an **ESP32-powered, solar-assisted environmental sensing network** designed to transform scattered environmental measurements into a living, high-resolution picture of the places we inhabit.
 
-[**🌐 View the Live Dashboard**](https://thelurkingbyte.github.io/ecopulse/)
+[**🌐 View the Project Portal**](https://thelurkingbyte.github.io/ecopulse/)
 
 </div>
 
