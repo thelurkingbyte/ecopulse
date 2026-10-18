@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Project EcoPulse portal">
+<link rel="icon" type="image/png" href="./logo.png">
+<link rel="apple-touch-icon" href="./logo.png">
+<title>EcoPulse</title>
+
+<style>
+/*
+  EcoPulse
+  Material 3 / Monet-inspired dark green theme.
+  The green family is static and is informed by MUI's green palette,
+  rather than being derived from the user's wallpaper.
+*/
+
+:root {
+  color-scheme: dark;
+
+  /* Static Material/MUI green family */
+  --primary: #A5D6A7;
+  --on-primary: #0B3313;
+  --primary-container: #1B5E20;
+  --on-primary-container: #C8E6C9;
+
+  --secondary: #B7CCB8;
+  --secondary-container: #304633;
+  --on-secondary-container: #D3E8D4;
+
+  --tertiary: #A7CEC1;
+  --tertiary-container: #234A40;
+  --on-tertiary-container: #C4E9DF;
+
+  /* Deliberately very dark, close to the requested #0a0f0b */
+  --surface: #0A0F0B;
+  --surface-dim: #080C09;
+  --surface-container-lowest: #070B08;
+  --surface-container-low: #0E1510;
+  --surface-container: #121A14;
+  --surface-container-high: #182119;
+  --surface-container-highest: #1E291F;
+
+  --on-surface: #E0E6E0;
+  --on-surface-variant: #AEB8AE;
+  --outline: #7F897F;
+  --outline-variant: #39423A;
+
+  --shape-xl: 28px;
+  --shape-l: 24px;
+  --shape-m: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--surface);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family:
+    "Google Sans", "Roboto", Inter, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Keep the background dark and essentially flat, with only an extremely
+   restrained tonal glow. No wallpaper-derived colors. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 8% 0%,
+      rgba(76, 175, 80, 0.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 94% 18%,
+      rgba(46, 125, 50, 0.045),
+      transparent 25%
+    );
+}
+
+main {
+  width: min(1080px, calc(100% - 32px));
+  margin: auto;
+  padding: 28px 0 72px;
+}
+
+/* ───────── Header ───────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 4px 4px 34px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+}
+
+/* Do NOT force a square. The source logo may have any aspect ratio. */
+.brand img {
+  width: auto;
+  height: 48px;
+  max-width: 180px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  border-radius: 0;
+  flex: 0 0 auto;
+}
+
+.brand-name {
+  font-size: 1.05rem;
+}
+
+.brand-name span {
+  color: var(--primary);
+}
+
+.header-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--surface-container);
+  color: var(--on-surface-variant);
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+
+.header-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* ───────── Hero ───────── */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 48px;
+  padding: 28px 4px 44px;
+}
+
+.hero-copy {
+  max-width: 720px;
+}
+
+.eyebrow {
+  color: var(--primary);
+  font-size: 0.79rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 12px 0 18px;
+  font-size: clamp(2.9rem, 6vw, 4.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  font-weight: 800;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 0;
+  color: var(--on-surface-variant);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+/* Also preserve the logo's native aspect ratio here. */
+.hero-logo {
+  width: auto;
+  height: 150px;
+  max-width: 240px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border-radius: 28px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ───────── Sections ───────── */
+
+.section {
+  margin-top: 34px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 4px 14px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 1.42rem;
+  letter-spacing: -0.025em;
+}
+
+.section-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-size: 0.95rem;
+}
+
+.supporting {
+  color: var(--on-surface-variant);
+  font-size: 0.84rem;
+}
+
+/* ───────── Dashboard ───────── */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  padding: 22px;
+  border-radius: var(--shape-l);
+  background: var(--surface-container);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .38);
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  background: var(--surface-container-high);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .42);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.card-title {
+  margin-bottom: 6px;
+  font-size: 1.07rem;
+  font-weight: 750;
+}
+
+.card-desc {
+  max-width: 48ch;
+  color: var(--on-surface-variant);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.card-action {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-container-highest);
+  color: var(--primary);
+}
+
+/* ───────── Project / Media ───────── */
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.media-card {
+  min-width: 0;
+  padding: 18px;
+  border-radius: var(--shape-l);
+}
+
+.media-card .card-icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+}
+
+.media-card .card-title {
+  font-size: 0.98rem;
+}
+
+.media-card .card-desc {
+  font-size: 0.84rem;
+  padding-right: 4px;
+}
+
+.media-card .card-action {
+  width: 34px;
+  height: 34px;
+  right: 14px;
+  bottom: 14px;
+}
+
+.video-card {
+  background: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+}
+
+.video-card:hover {
+  background: #2A5549;
+}
+
+.video-card .card-desc {
+  color: rgba(196, 233, 223, .74);
+}
+
+.video-card .card-action {
+  background: rgba(167, 206, 193, .13);
+  color: var(--on-tertiary-container);
+}
+
+/* ───────── Bibliography ───────── */
+
+.bibliography {
+  padding: 8px 22px;
+  border-radius: var(--shape-xl);
+  background: var(--surface-container-low);
+}
+
+.biblio-item {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 14px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--outline-variant);
+  line-height: 1.55;
+}
+
+.biblio-item:last-child {
+  border-bottom: 0;
+}
+
+.num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.biblio-item a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 650;
+}
+
+.biblio-item a:hover {
+  text-decoration: underline;
+}
+
+/* ───────── Footer ───────── */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 48px;
+  padding: 0 4px;
+  color: var(--on-surface-variant);
+  font-size: 0.82rem;
+}
+
+/* ───────── Responsive ───────── */
+
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .hero-logo {
+    display: none;
+  }
+
+  .media-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-chip {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  main {
+    padding-top: 20px;
+  }
+
+  .topbar {
+    padding-bottom: 22px;
+  }
+
+  .brand img {
+    height: 40px;
+    max-width: 150px;
+  }
+
+  .hero {
+    padding-bottom: 28px;
+  }
+
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="./logo.png" alt="EcoPulse logo">
+    <div class="brand-name">ECO<span>PULSE</span></div>
+  </div>
+  <div class="header-chip">Environmental monitoring · project portal</div>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">Project EcoPulse</div>
+    <h1>Environmental data,<br>made visible.</h1>
+    <p>
+      A connected air-quality monitoring project combining low-cost sensing,
+      environmental data, and a live simulated dashboard.
+    </p>
+  </div>
+  <img class="hero-logo" src="./logo.png" alt="Project EcoPulse">
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-title">
+      <span class="section-icon">▦</span>
+      <h2>Dashboard</h2>
+    </div>
+    <span class="supporting">Deployment & source</span>
+  </div>
+
+  <div class="dashboard-grid">
+    <a class="card" href="https://ecopulse-dashboard-teal.vercel.app/" target="_blank" rel="noopener">
+      <div class="card-icon">▦</div>
+      <div class="card-title">Live simulated dashboard</div>
+      <div class="card-desc">
+        Explore the deployed EcoPulse monitoring interface and simulated environmental readings.
+      </div>
+      <span class="card-action">↗</span>
+    </a>
+
+    <a class="card" href="https://github.com/thelurkingbyte/ecopulse-dashboard" target="_blank" rel="noopener">
+      <div class="card-icon">&lt;/&gt;</div>
+      <div class="card-title">Dashboard React code</div>
+      <div class="card-desc">
+        Source code for the React dashboard, hosted openly on GitHub.
+      </div>
+      <span class="card-action">↗</span>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-title">
+      <span class="section-icon">◎</span>
+      <h2>Project & media</h2>
+    </div>
+    <span class="supporting">Follow, watch, explore</span>
+  </div>
+
+  <div class="media-grid">
+    <a class="card media-card" href="https://www.instagram.com/project.ecopulse" target="_blank" rel="noopener">
+      <div class="card-icon">◎</div>
+      <div class="card-title">Instagram</div>
+      <div class="card-desc">Project updates, visuals, progress, and announcements.</div>
+      <span class="card-action">↗</span>
+    </a>
+
+    <a class="card media-card" href="https://www.youtube.com/watch?v=cE6fBZfbEzg" target="_blank" rel="noopener">
+      <div class="card-icon">▶</div>
+      <div class="card-title">Project video</div>
+      <div class="card-desc">Watch the EcoPulse project presentation on YouTube.</div>
+      <span class="card-action">↗</span>
+    </a>
+
+    <a class="card media-card" href="https://github.com/thelurkingbyte/ecopulse" target="_blank" rel="noopener">
+      <div class="card-icon">⌘</div>
+      <div class="card-title">EcoPulse GitHub</div>
+      <div class="card-desc">Main project repository and implementation materials.</div>
+      <span class="card-action">↗</span>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-title">
+      <span class="section-icon">▤</span>
+      <h2>Bibliography</h2>
+    </div>
+    <span class="supporting">Research & technical references</span>
+  </div>
+
+  <div class="bibliography">
+    <div class="biblio-item">
+      <span class="num">1</span>
+      <div>
+        WHO, <em>Air Quality Monitoring for Enhanced Understanding of Health Impacts and Beyond</em> (2026).
+        <a href="https://www.who.int/publications/i/item/B09646" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">2</span>
+      <div>
+        WHO, <em>Health Effects of Air Pollution: Evidence and Implications</em> (2026).
+        <a href="https://www.who.int/publications/i/item/B09563" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">3</span>
+      <div>
+        WHO, <em>Ambient Air Pollution: A Global Assessment of Exposure and Burden of Disease</em> (2016).
+        <a href="https://www.who.int/publications/i/item/9789241511353" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">4</span>
+      <div>
+        Idrees, Z. and Zheng, L., <em>Low Cost Air Pollution Monitoring Systems: A Review of Protocols and Enabling Technologies</em>, Journal of Industrial Information Integration, Volume 17, 2020, Article 100123.
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">5</span>
+      <div>
+        <em>Performance Evaluation of Low-Cost Air Quality Sensors: A Review</em>, Science of the Total Environment, Volume 818, 2022, Article 151769.
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">6</span>
+      <div>
+        Zimmerman, N., <em>Tutorial: Guidelines for Implementing Low-Cost Sensor Networks for Aerosol Monitoring</em>, Journal of Aerosol Science, Volume 159, 2022, Article 105872.
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">7</span>
+      <div>
+        Sensirion, <em>SCD4x CO₂ Sensor Documentation and Datasheet</em>.
+        <a href="https://sensirion.com/media/documents/48C4B7FB/64C134E7/Sensirion_SCD4x_Datasheet.pdf" target="_blank" rel="noopener">PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">8</span>
+      <div>
+        Sensirion, <em>SHT3x-DIS Digital Humidity and Temperature Sensor Datasheet</em>.
+        <a href="https://sensirion.com/media/documents/213E6A3B/63A5A569/Datasheet_SHT3x_DIS.pdf" target="_blank" rel="noopener">PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">9</span>
+      <div>
+        Bosch Sensortec, <em>BMP390 Digital Pressure Sensor Datasheet</em>.
+        <a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp390-ds002.pdf" target="_blank" rel="noopener">PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">10</span>
+      <div>
+        Plantower, <em>PMS5003 Digital Universal Particle Concentration Sensor Documentation</em>.
+        <a href="https://www.aqmd.gov/docs/default-source/aq-spec/resources-page/plantower-pms5003-manual_v2-3.pdf" target="_blank" rel="noopener">PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="biblio-item">
+      <span class="num">11</span>
+      <div>
+        Espressif Systems, <em>ESP32 Series Datasheet</em>.
+        <a href="https://documentation.espressif.com/esp32_datasheet_en.pdf" target="_blank" rel="noopener">PDF ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Project EcoPulse</span>
+  <span>Environmental Monitoring</span>
+</footer>
+
+</main>
+</body>
+</html>
